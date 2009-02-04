@@ -16,4 +16,14 @@ class AVL : public BST<T>{
 			short deltaHeight;
 		};
 
+		Node* root;
+
+		Node* getNode(T elem, short dH){
+			Node* temp;
+			temp->left = temp->right = NULL;
+			temp->element = elem;
+			temp->deltaHeight = dH;
+			return temp;
+		};
+
 };
