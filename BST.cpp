@@ -69,6 +69,11 @@ template <class T>
 BST<T>::BST(){
 	root = NULL;
 }
+
+template <class T>
+BST<T>::BST(const BST* bst){
+	clone(bst);
+}
 //******************//
 
 
