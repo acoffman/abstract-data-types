@@ -36,5 +36,8 @@ class BST : public SearchableADT<T>{
 
 	protected:
 		int numNodes;
+		void clearHelper(Node* rt);
+		void insertHelper(Node* rt, Node* newNode);
+		bool findHelper(Node* rt, T elem);
 };
 
