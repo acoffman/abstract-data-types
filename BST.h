@@ -39,5 +39,6 @@ class BST : public SearchableADT<T>{
 		void clearHelper(Node* rt);
 		void insertHelper(Node* rt, Node* newNode);
 		bool findHelper(Node* rt, T elem);
+		void cloneHelper(Node* thisTree, Node* originalTree);
 };
 

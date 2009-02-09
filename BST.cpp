@@ -83,4 +83,17 @@ int BST<T>::numEntries(){
 	return numNodes;
 }
 
+template <class T>
+void BST<T>::clone(const BST* bst){
+	cloneHelper(root, bst.root);
+}
+
+template <class T>
+void BST<T>::cloneHelper(Node* thisTree, Node* originalTree){
+	thisTree = getNode(originalTree->element);
+	if(originalTree->left != NULL)
+		cloneHelper(thisTree->left, originalTree->left);
+	if(originalTree->right != NULL)
+		cloneHelper(thisTree->right, originalTree->right);
+}
 
