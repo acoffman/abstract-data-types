@@ -1,5 +1,6 @@
 #include "BST.h"
-
+#include <iostream>
+using namespace std;
 //CLEAR AND HELPER//
 template <class T>
 void BST<T>::clear(){
@@ -27,12 +28,12 @@ bool BST<T>::isThere(T value){
 
 template <class T>
 bool BST<T>::findHelper(Node* rt, T elem){
-	if(elem < rt->element)
+	if(rt == NULL)
+		return false;
+	else if(elem < rt->element)
 		return findHelper(rt->left, elem);
 	else if(elem > rt->element)
 		return findHelper(rt->right, elem);
-	else if(rt == NULL)
-		return false;
 	else return true;
 }
 //*******************//
@@ -45,7 +46,7 @@ void BST<T>::insertEntry(T value){
 }
 
 template <class T>
-void BST<T>::insertHelper(Node* rt, Node* newNode){
+void BST<T>::insertHelper(Node* &rt, Node* newNode){
 	if(rt == NULL){
 		rt = newNode;
 		++numNodes;
@@ -54,7 +55,6 @@ void BST<T>::insertHelper(Node* rt, Node* newNode){
 		insertHelper(rt->left, newNode);
 	else if(newNode->element > rt->element)
 		insertHelper(rt->right, newNode);
-	else ;
 }
 //********************//
 
@@ -76,6 +76,13 @@ BST<T>::BST(const BST* bst){
 }
 //******************//
 
+//DELETE FUNCTIONS//
+template <class T>
+void BST<T>::deleteEntry(T value){
+	return;
+}
+
+//****************//
 
 //MISC FUNCTIONS//
 template <class T>
@@ -96,4 +103,10 @@ void BST<T>::cloneHelper(Node* thisTree, Node* originalTree){
 	if(originalTree->right != NULL)
 		cloneHelper(thisTree->right, originalTree->right);
 }
+
+template <class T>
+int BST<T>::loadFromFile(string filename){
+	return 0;
+}
+
 

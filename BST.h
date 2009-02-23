@@ -22,11 +22,12 @@ class BST : public SearchableADT<T>{
 	private:
 		struct Node {
 			T element;
-			Node* left, right;	
+			Node *left, *right;	
 		};
 
 		Node* getNode(T elem){
 			Node* temp;
+			temp = new Node;
 			temp->left = temp->right = NULL;
 			temp->element = elem;
 			return temp;
@@ -37,7 +38,7 @@ class BST : public SearchableADT<T>{
 	protected:
 		int numNodes;
 		void clearHelper(Node* rt);
-		void insertHelper(Node* rt, Node* newNode);
+		void insertHelper(Node* &rt, Node* newNode);
 		bool findHelper(Node* rt, T elem);
 		void cloneHelper(Node* thisTree, Node* originalTree);
 };

@@ -1,6 +1,6 @@
 #include <ctime>
 #include <iostream>
-#include "AVL.h"
+#include "BST.cpp"
 
 using namespace std;
 
@@ -11,7 +11,24 @@ int main(int agvc, char* argvc[]){
 	start = clock();
 
 	//do some work
-	//SearchableADT<int> *test = new BST<int>;
+	SearchableADT<int> *test = new BST<int>;
+	
+	test->insertEntry(1);
+	test->insertEntry(2);
+	test->insertEntry(3);
+	test->insertEntry(0);
+	test->insertEntry(-5);
+	 
+	
+	cout << test->isThere(-5);
+	cout << test->isThere(3);
+	cout << test->isThere(1);
+	cout << test->isThere(-15);
+
+
+	test->clear();
+	
+	cout << test->isThere(1);
 
 	finish = clock();
 
