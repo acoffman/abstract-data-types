@@ -19,7 +19,8 @@ int main(int agvc, char* argvc[]){
 	test->insertEntry(0);
 	test->insertEntry(-5);
 	 
-	
+ cout << endl << test->numEntries();
+
 	cout << test->isThere(-5);
 	cout << test->isThere(3);
 	cout << test->isThere(1);
@@ -27,6 +28,8 @@ int main(int agvc, char* argvc[]){
 
 
 	test->clear();
+
+	cout << endl << test->numEntries();
 	
 	cout << test->isThere(1);
 
