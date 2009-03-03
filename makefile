@@ -1,19 +1,8 @@
-objects = AVL.o BST.o driver.o
-cpp = g++
+compile = g++
 
-driver: $(objects)
-	$(cpp) -o $@ $+
-
-driver.o: driver.cpp
-	$(cpp) -c driver.cpp
-
-AVL.o: AVL.cpp AVL.h
-	$(cpp) -c AVL.cpp
-
-BST.o: BST.cpp BST.h
-	$(cpp) -c BST.cpp
-
+driver:
+	$(compile) driver.cpp -o $@ 
 
 .PHONY: clean
 clean: 
-	rm $(objects) driver
+	rm  driver

@@ -1,6 +1,3 @@
-#include "BST.h"
-#include <iostream>
-using namespace std;
 //CLEAR AND HELPER//
 template <class T>
 void BST<T>::clear(){
@@ -71,7 +68,7 @@ BST<T>::BST(){
 }
 
 template <class T>
-BST<T>::BST(const BST* bst){
+BST<T>::BST(const BST<T> &bst){
 	clone(bst);
 }
 //******************//
@@ -79,7 +76,27 @@ BST<T>::BST(const BST* bst){
 //DELETE FUNCTIONS//
 template <class T>
 void BST<T>::deleteEntry(T value){
-	return;
+		deleteHelper(value, root);
+}
+
+template <class T>
+void BST<T>::deleteHelper(T &value, Node* &rt){
+	if(rt == NULL)
+		return;
+	else if (value < rt->element)
+		deleteHelper(value, rt->left);
+	else if (value > rt->element)
+		deleteHelper(value, rt->right);
+	else if(rt->left != NULL && rt->right != NULL){
+		rt->element = findMin(rt->right)->element;
+		deleteHelper(rt->element, rt->right);
+	}
+	else{
+		Node* old = rt;
+		rt = (rt->left != NULL) ? rt->left : rt->right;
+		delete old;
+		numNodes--;
+	}
 }
 
 //****************//
@@ -107,6 +124,15 @@ void BST<T>::cloneHelper(Node* thisTree, Node* originalTree){
 template <class T>
 int BST<T>::loadFromFile(string filename){
 	return 0;
+}
+
+template <class T>
+typename BST<T>::Node* BST<T>::findMin(Node* rt) const{
+	if(rt == NULL)
+		return NULL;
+	if(rt->left == NULL)
+		return rt;
+	return findMin(rt->left);
 }
 
 

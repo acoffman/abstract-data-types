@@ -1,3 +1,6 @@
+#ifndef SEARCHABLE_ADT_H
+#define SEARCHABLE_ADT_H
+
 #include <string>
 
 using namespace std;
@@ -13,3 +16,5 @@ class SearchableADT{
 		virtual bool isThere(T value) = 0;
 		virtual int numEntries() = 0;
 };
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef BST_H
+#define BST_H
+
 #include "SearchableADT.h"
 
 using namespace std;
@@ -8,16 +11,15 @@ class BST : public SearchableADT<T>{
 	public:
 		BST();
 		~BST();
-		BST(const BST* bst);
+		BST(const BST<T> &bst);
 		int loadFromFile(string filename);
 		void clear();
-		virtual void insertEntry(T value);
-		virtual void deleteEntry(T value);
+		void insertEntry(T value);
+		void deleteEntry(T value);
 		bool isThere(T value);
 		int numEntries();
 		void clone(const BST* bst);
 
-		const BST* operator=(const BST* bst);
 	
 	private:
 		struct Node {
@@ -41,5 +43,11 @@ class BST : public SearchableADT<T>{
 		void insertHelper(Node* &rt, Node* newNode);
 		bool findHelper(Node* rt, T elem);
 		void cloneHelper(Node* thisTree, Node* originalTree);
+		void deleteHelper(T &value, Node* &rt);
+		Node* findMin(Node* t) const;
 };
+
+#include "BST.cpp"
+
+#endif
 
