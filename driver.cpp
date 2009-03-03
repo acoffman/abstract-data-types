@@ -16,22 +16,32 @@ int main(int agvc, char* argvc[]){
 	SearchableADT<int> *test = new AVL<int>;
 	
 	test->insertEntry(1);
-	//test->insertEntry(2);
-	//test->insertEntry(3);
-	//test->insertEntry(0);
-	//test->insertEntry(-5);
+	test->insertEntry(2);
+	test->insertEntry(3);
+	test->insertEntry(4);
+	test->insertEntry(5);
+	test->insertEntry(6);
+	test->insertEntry(7);
+	test->insertEntry(8);
+	test->insertEntry(9);
+	test->insertEntry(10);
+	test->insertEntry(11);
+	test->insertEntry(12);
+	test->insertEntry(13);
+
+
 	 
  	cout << endl << test->numEntries();
 
 
 	//test->deleteEntry(0);
-	cout << test->numEntries();
+	//cout << test->numEntries();
 
 	cout << endl << test->isThere(0);
 
 	//test->deleteEntry(-5);
 
-	cout << endl << test->isThere(-5);
+	cout << endl << test->isThere(13);
 	cout << endl << test->isThere(1);
 
 	//cout << endl << test->numEntries();

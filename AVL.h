@@ -21,6 +21,7 @@ class AVL : public SearchableADT<T>{
 
 		Node* getNode(T elem){
 			Node* temp;
+			temp = new Node;
 			temp->left = temp->right = NULL;
 			temp->element = elem;
 			temp->deltaHeight = 0;

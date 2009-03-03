@@ -27,7 +27,7 @@ void AVL<T>::insertEntry(T val){
 
 template <class T>
 void AVL<T>::insertHelper(T val, Node* &rt){
-	if(rt == NULL){
+ if(rt == NULL){
 		rt = getNode(val);
 		numNodes++;
 	}else if(val < rt->element){
