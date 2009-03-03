@@ -6,8 +6,8 @@
 
 using namespace std;
 
+//Global Variables (the dictionary) and function prototypes
 SearchableADT<string> *dictionary;
-
 double time_this(void (*f)());
 void load_dictionary();
 void clear_dictionary();
@@ -16,6 +16,10 @@ void search_file();
 void report_stats();
 void search_single_word(string word);
 
+//This function takes a void function pointer 
+//and runs it with the timing code wrapped around it
+//this saves from having the timing code duplicated in every
+//function.
 double time_this(void (*f)()){
 	clock_t start, finish;
 	start = clock();
@@ -24,6 +28,7 @@ double time_this(void (*f)()){
 	return ((double)(finish-start)/CLOCKS_PER_SEC);
 }
 
+//Main: includes menus and calls to helper functions.
 int main(int agvc, char* argvc[]){
 
 	int choice;
@@ -96,9 +101,8 @@ int main(int agvc, char* argvc[]){
 	return 0;
 }
 
-
-
-
+//Prompts the user for and then loads a dictionary file
+//Won't crash if the file is invalid
 void load_dictionary(){
 	int result;
 	do{
@@ -109,11 +113,12 @@ void load_dictionary(){
 		}while(result == -1);	
 }
 
+//Clears the dictionary
 void clear_dictionary(){
 	dictionary->clear();
 }
 
-
+//Takes a word input from the command prompt and searches the dictionary for it
 void search_word(){
 	string word; 
 	cout << "Please enter the word you would like to search for: ";
@@ -121,6 +126,8 @@ void search_word(){
 	search_single_word(word);
 }
 
+//Takes a file from the command prompt, reads it in and searches each
+//word in the file
 void search_file(){
 	string word;
 	ifstream fin;
@@ -138,6 +145,8 @@ void search_file(){
 	}
 }
 
+//Takes a string word argument and searches for the word (including blanks)
+//in the SearchableADT.
 void search_single_word(string word){
 	int qPlace = -1;
 	for(int i = 0; i< word.length(); i++)
@@ -163,6 +172,7 @@ void search_single_word(string word){
 	}
 }
 
+//Reports statistics about the SearchableADT currently in use
 void report_stats(){
 		cout << "The dictionary has: " << dictionary->numEntries() << " entries." << endl;
 		cout << "The tree is " << " layers deep." << endl;
