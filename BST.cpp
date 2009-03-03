@@ -98,7 +98,6 @@ void BST<T>::deleteHelper(T &value, Node* &rt){
 		numNodes--;
 	}
 }
-
 //****************//
 
 //MISC FUNCTIONS//
@@ -123,6 +122,17 @@ void BST<T>::cloneHelper(Node* thisTree, Node* originalTree){
 
 template <class T>
 int BST<T>::loadFromFile(string filename){
+	ifstream fin;
+	fin.open(filename.c_str());
+	if(fin.fail()){
+		return -1;
+	}else{
+		while(!fin.eof()){
+			T word;
+			fin >> word;
+			insertEntry(word);
+		}
+	}
 	return 0;
 }
 
@@ -134,5 +144,4 @@ typename BST<T>::Node* BST<T>::findMin(Node* rt) const{
 		return rt;
 	return findMin(rt->left);
 }
-
 

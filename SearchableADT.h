@@ -2,6 +2,7 @@
 #define SEARCHABLE_ADT_H
 
 #include <string>
+#include <fstream>
 
 using namespace std;
 

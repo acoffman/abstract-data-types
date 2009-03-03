@@ -6,51 +6,164 @@
 
 using namespace std;
 
-int main(int agvc, char* argvc[]){
-	
+SearchableADT<string> *dictionary;
+
+double time_this(void (*f)());
+void load_dictionary();
+void clear_dictionary();
+void search_word();
+void search_file();
+void report_stats();
+void search_single_word(string word);
+
+double time_this(void (*f)()){
 	clock_t start, finish;
-
 	start = clock();
-
-	//do some work
-	SearchableADT<int> *test = new AVL<int>;
-	
-	test->insertEntry(1);
-	test->insertEntry(2);
-	test->insertEntry(3);
-	test->insertEntry(4);
-	test->insertEntry(5);
-	test->insertEntry(6);
-	test->insertEntry(7);
-	test->insertEntry(8);
-	test->insertEntry(9);
-	test->insertEntry(10);
-	test->insertEntry(11);
-	test->insertEntry(12);
-	test->insertEntry(13);
-
-
-	 
- 	cout << endl << test->numEntries();
-
-
-	//test->deleteEntry(0);
-	//cout << test->numEntries();
-
-	cout << endl << test->isThere(0);
-
-	//test->deleteEntry(-5);
-
-	cout << endl << test->isThere(13);
-	cout << endl << test->isThere(1);
-
-	//cout << endl << test->numEntries();
-
+	f();
 	finish = clock();
+	return ((double)(finish-start)/CLOCKS_PER_SEC);
+}
 
-	cout << "time: "
-		<< ((double)(finish - start)/CLOCKS_PER_SEC)
-		<< endl;
+int main(int agvc, char* argvc[]){
+
+	int choice;
 	
+	cout << "Crossword Puzzle Helper" << endl << endl;
+	cout << "Please select a number: " << endl
+			 << "1. Use Binary Search Tree" << endl
+			 << "2. Use AVL Tree" << endl
+			 << "Please select 1 or 2: ";
+	cin >> choice;
+
+	while(choice != 1 && choice != 2){
+		cout << "Invalid selection, please choose 1 or 2: ";
+		cin >> choice;
+	}
+
+	if(choice == 1)
+		dictionary = new BST<string>;
+	else
+		dictionary = new AVL<string>;
+
+	do{
+		cout << "Main Menu" << endl
+				 << "   1. Load dictionary from file." << endl
+			 	 << "   2. Clear current dictionary." << endl
+				 << "   3. Check for an entry." << endl
+				 << "   4. Check for entries from a file." << endl
+			 	 << "   5. Report tree statistics." << endl
+				 << "   6. Exit." << endl
+				 << "Selection: ";
+
+		cin >> choice;
+		while(choice < 1 || choice > 6){
+			cout << endl << "Invalid selection, please choose a number 1 through 5: ";
+			cin >> choice;
+		}
+
+		cout << "\n\n";
+	
+		if(choice == 1){
+		
+			double time = time_this(&load_dictionary);
+			cout << "Dictionary loaded in: " << time << " seconds." << endl;
+
+		}else if(choice == 2){
+		
+			double time = time_this(&clear_dictionary);
+			cout << "Dictionary cleared in: " << time << " seconds." << endl;
+	
+		}else if(choice == 3){
+		
+			double time = time_this(&search_word);
+			cout << "Your query was completed in " << time << " seconds." << endl;
+	
+		}else if(choice == 4){
+
+			double time = time_this(&search_file);
+			cout << "Your query was completed in " << time << " seconds." << endl;	
+	
+		}else if(choice == 5){
+		
+			double time = time_this(&report_stats);
+			cout << "Statistics collected in: " << time << " seconds." << endl;
+	
+		}else return 0;
+  
+		cout << "\n\n";
+
+	}while(true);	
 	return 0;
+}
+
+
+
+
+void load_dictionary(){
+	int result;
+	do{
+			string filename;
+			cout << "Please enter a filename to load: ";
+			cin >> filename;
+			result = dictionary->loadFromFile(filename);
+		}while(result == -1);	
+}
+
+void clear_dictionary(){
+	dictionary->clear();
+}
+
+
+void search_word(){
+	string word; 
+	cout << "Please enter the word you would like to search for: ";
+	cin >> word;
+	search_single_word(word);
+}
+
+void search_file(){
+	string word;
+	ifstream fin;
+	string filename;
+	cout << "Please enter the filename to search: " ;
+	cin >> filename;
+	fin.open(filename.c_str());
+	if(fin.fail()){
+		cout << "Unable to open file." << endl;
+		return;
+	}
+	while(!fin.eof()){
+		fin >> word;
+		search_single_word(word);
+	}
+}
+
+void search_single_word(string word){
+	int qPlace = -1;
+	for(int i = 0; i< word.length(); i++)
+		if(word[i] == '?')
+			qPlace = i;
+	if(qPlace > -1){
+		string suggestions ="";
+		for(char i = 'a'; i <= 'z'; i++){
+			word[qPlace] = i;
+			if(dictionary->isThere(word))
+				suggestions = suggestions + word + " ";
+		}
+
+		word[qPlace] = '?';
+		if(suggestions == "")
+			cout << "Found no suggestions for "<< word << " in the loaded dictionary." << endl;
+		else
+			cout << "Suggestions: " << suggestions << endl;
+	}else{
+		if(dictionary->isThere(word))
+			cout << word <<" is in the dictionary and appears to be spelled correctly. " << endl;
+		else cout << word <<" is not in the dictionary and may be mispelled." << endl; 	
+	}
+}
+
+void report_stats(){
+		cout << "The dictionary has: " << dictionary->numEntries() << " entries." << endl;
+		cout << "The tree is " << " layers deep." << endl;
 }

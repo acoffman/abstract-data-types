@@ -157,6 +157,17 @@ int AVL<T>::numEntries(){
 
 template <class T>
 int AVL<T>::loadFromFile(string filename){
+		ifstream fin;
+	fin.open(filename.c_str());
+	if(fin.fail()){
+		return -1;
+	}else{
+		while(!fin.eof()){
+			T word;
+			fin >> word;
+			insertEntry(word);
+		}
+	}
 	return 0;
 }
 
