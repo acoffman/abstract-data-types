@@ -8,6 +8,8 @@
  * 
  * Build Instructions: A makefile is included in the project directory
  * 	program can be run as ./driver
+ *
+ * 	CITATION: Much of the code for the BST was taken or adapted from the text book
  ******************************/
 #ifndef BST_H
 #define BST_H
