@@ -204,21 +204,13 @@ int AVL<T>::treeHeight(){
 
 template <class T>
 int AVL<T>::heightHelper(Node* rt){
-
-	if(rt->left != NULL || rt->right != NULL){
-		int left;
-		if (rt->left == NULL)
-			return 0;
-		else left = heightHelper(rt->left);
-
-		int right; 
-		if(rt->right == NULL)
-			return 0;
-		else right = heightHelper(rt->right);
-		
-		if(left > right)
-			return left + 1;
-		else 
-			return right + 1;
-	}else return 1;
+	if(rt == NULL)
+		return 0;
+	else{
+		int height, height_left, height_right;
+		height_left = heightHelper(rt->left);
+		height_right = heightHelper(rt->right);
+		height = height_right > height_left ? height_right : height_left;
+		return height + 1;
+	}
 }
