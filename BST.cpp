@@ -157,6 +157,8 @@ typename BST<T>::Node* BST<T>::findMin(Node* rt) const{
 	return findMin(rt->left);
 }
 
+
+//TREE HEIGHT AND HELPER//
 template <class T>
 int BST<T>::treeHeight(){
 	return heightHelper(root);

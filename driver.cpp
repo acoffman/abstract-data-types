@@ -8,7 +8,9 @@
  * 	functions.
  *
  * Build Instructions: A makefile is included in the project directory
- * 	program can be run as ./driver
+ * 	program can be run as follows:
+ * 	make
+ * 	./driver
  ******************************/
 
 #include <ctime>

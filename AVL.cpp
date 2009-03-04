@@ -197,6 +197,7 @@ void AVL<T>::deleteEntry(T value){
 	return;
 }
 
+//TREE HEIGHT AND HELPER//
 template <class T>
 int AVL<T>::treeHeight(){
 	return heightHelper(root);
