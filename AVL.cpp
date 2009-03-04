@@ -196,3 +196,29 @@ template <class T>
 void AVL<T>::deleteEntry(T value){
 	return;
 }
+
+template <class T>
+int AVL<T>::treeHeight(){
+	return heightHelper(root);
+}
+
+template <class T>
+int AVL<T>::heightHelper(Node* rt){
+
+	if(rt->left != NULL || rt->right != NULL){
+		int left;
+		if (rt->left == NULL)
+			return 0;
+		else left = heightHelper(rt->left);
+
+		int right; 
+		if(rt->right == NULL)
+			return 0;
+		else right = heightHelper(rt->right);
+		
+		if(left > right)
+			return left + 1;
+		else 
+			return right + 1;
+	}else return 1;
+}

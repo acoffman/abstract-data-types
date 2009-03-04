@@ -16,6 +16,7 @@ class SearchableADT{
 		virtual void deleteEntry(T value) = 0;
 		virtual bool isThere(T value) = 0;
 		virtual int numEntries() = 0;
+		virtual int treeHeight() = 0;
 };
 
 #endif

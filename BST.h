@@ -32,6 +32,7 @@ class BST : public SearchableADT<T>{
 		bool isThere(T value);
 		int numEntries();
 		void clone(const BST* bst);
+		int treeHeight();
 
 	
 	private:
@@ -58,6 +59,7 @@ class BST : public SearchableADT<T>{
 		void cloneHelper(Node* thisTree, Node* originalTree);
 		void deleteHelper(T &value, Node* &rt);
 		Node* findMin(Node* t) const;
+		int heightHelper(Node* rt);
 };
 
 #include "BST.cpp"

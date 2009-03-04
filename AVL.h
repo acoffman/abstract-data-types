@@ -53,6 +53,7 @@ class AVL : public SearchableADT<T>{
 			void doubleRotateWithLeftChild(Node* &rt);
 			void doubleRotateWithRightChild(Node* &rt);
 			int max(int arg1, int arg2);
+			int heightHelper(Node* rt);
 
 		public:
 			AVL();
@@ -65,6 +66,7 @@ class AVL : public SearchableADT<T>{
 			void clone(AVL<T>* rt);
 			int numEntries();
 			int loadFromFile(string filename);
+			int treeHeight();
 };
 
 #include "AVL.cpp"

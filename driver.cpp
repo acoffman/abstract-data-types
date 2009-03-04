@@ -188,5 +188,5 @@ void search_single_word(string word){
 //Reports statistics about the SearchableADT currently in use
 void report_stats(){
 		cout << "The dictionary has: " << dictionary->numEntries() << " entries." << endl;
-		cout << "The tree is " << " layers deep." << endl;
+		cout << "The tree is " << dictionary->treeHeight() << " layers deep." << endl;
 }
