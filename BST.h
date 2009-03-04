@@ -1,3 +1,14 @@
+/******************************
+ * Author: Adam Coffman
+ *
+ * Filename: BST.h
+ *
+ * Description: This is the header file for the Binary 
+ * Search Tree. It contains variables and function protoypes
+ * 
+ * Build Instructions: A makefile is included in the project directory
+ * 	program can be run as ./driver
+ ******************************/
 #ifndef BST_H
 #define BST_H
 

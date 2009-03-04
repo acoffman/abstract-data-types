@@ -1,3 +1,16 @@
+/******************************
+ * Author: Adam Coffman
+ *
+ * Filename: driver.cpp
+ *
+ * Description: This is the runnable element of the crossword puzzle solver
+ * 	it contains the main method, the user interface and appropriate helper
+ * 	functions.
+ *
+ * Build Instructions: A makefile is included in the project directory
+ * 	program can be run as ./driver
+ ******************************/
+
 #include <ctime>
 #include <iostream>
 #include "SearchableADT.h"

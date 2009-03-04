@@ -1,3 +1,15 @@
+/******************************
+ * Author: Adam Coffman
+ *
+ * Filename: AVL.h
+ *
+ * Description: This is the header file for the AVL Tree 
+ * 	It contains variables and function protoypes
+ * 
+ * Build Instructions: A makefile is included in the project directory
+ * 	program can be run as ./driver
+ ******************************/
+
 #ifndef AVL_H
 #define AVL_H
 

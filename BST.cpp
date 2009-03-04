@@ -1,3 +1,15 @@
+/******************************
+ * Author: Adam Coffman
+ *
+ * Filename: BST.cpp
+ *
+ * Description: This is the implementation file for the Binary 
+ * Search Tree. It contains function definitions. 
+ * 
+ * Build Instructions: A makefile is included in the project directory
+ * 	program can be run as ./driver
+ ******************************/
+
 //CLEAR AND HELPER//
 template <class T>
 void BST<T>::clear(){
