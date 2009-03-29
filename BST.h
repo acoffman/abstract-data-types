@@ -33,6 +33,7 @@ class BST : public SearchableADT<T>{
 		int numEntries();
 		void clone(const BST* bst);
 		int treeHeight();
+		int tableCapacity(){return -1;}; 
 
 	
 	private:

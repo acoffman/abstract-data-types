@@ -18,6 +18,7 @@
 #include "SearchableADT.h"
 #include "BST.h"
 #include "AVL.h"
+#include "HashTable.h"
 
 using namespace std;
 
@@ -36,11 +37,10 @@ void search_single_word(string word);
 //this saves from having the timing code duplicated in every
 //function.
 double time_this(void (*f)()){
-	clock_t start, finish;
+	clock_t start;
 	start = clock();
 	f();
-	finish = clock();
-	return ((double)(finish-start)/CLOCKS_PER_SEC);
+	return ((double)(clock()-start)/CLOCKS_PER_SEC);
 }
 
 //Main: includes menus and calls to helper functions.
@@ -52,18 +52,21 @@ int main(int agvc, char* argvc[]){
 	cout << "Please select a number: " << endl
 			 << "1. Use Binary Search Tree" << endl
 			 << "2. Use AVL Tree" << endl
-			 << "Please select 1 or 2: ";
+			 << "3. Use Hash Table" << endl
+			 << "Please select 1, 2 or 3: ";
 	cin >> choice;
 
-	while(choice != 1 && choice != 2){
-		cout << "Invalid selection, please choose 1 or 2: ";
+	while(choice < 1 || choice > 2){
+		cout << "Invalid selection, please choose 1, 2 or 3: ";
 		cin >> choice;
 	}
 
 	if(choice == 1)
 		dictionary = new BST<string>;
-	else
+	else if (choice == 2)
 		dictionary = new AVL<string>;
+	else
+		dictionary = new HashTable<string>;
 
 	do{
 		cout << "Main Menu" << endl
@@ -77,7 +80,7 @@ int main(int agvc, char* argvc[]){
 
 		cin >> choice;
 		while(choice < 1 || choice > 6){
-			cout << endl << "Invalid selection, please choose a number 1 through 5: ";
+			cout << endl << "Invalid selection, please choose a number 1 through 6: ";
 			cin >> choice;
 		}
 
@@ -190,5 +193,13 @@ void search_single_word(string word){
 //Reports statistics about the SearchableADT currently in use
 void report_stats(){
 		cout << "The dictionary has: " << dictionary->numEntries() << " entries." << endl;
-		cout << "The tree is " << dictionary->treeHeight() << " layers deep." << endl;
+		//This could be cleaner, but it keeps the treeHeight from being 
+		//called twice, tableCapacity will be constant time, so it costs
+		//nothing to call it for check, but if we called treeHeight twice,
+		//it could potentially be quite costly
+		int tSize = dictionary->tableCapacity();
+		if(tSize == -1)
+		 cout << "The tree is " <<  dictionary->treeHeight() << " layers deep." << endl;
+		else
+		 cout << "The the hash table has a capacity of" << dictionary->tableCapacity() <<  "elements." << endl;	
 }

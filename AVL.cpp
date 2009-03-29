@@ -192,11 +192,6 @@ typename AVL<T>::Node* AVL<T>::findMin(Node* rt) const{
 	return findMin(rt->left);
 }
 
-template <class T>
-void AVL<T>::deleteEntry(T value){
-	return;
-}
-
 //TREE HEIGHT AND HELPER//
 template <class T>
 int AVL<T>::treeHeight(){
@@ -215,3 +210,46 @@ int AVL<T>::heightHelper(Node* rt){
 		return height + 1;
 	}
 }
+
+//DELETE FUNCTION AND HELPER//
+template <class T>
+void AVL<T>::deleteEntry(T value){
+		deleteHelper(value, root);
+}
+
+template <class T>
+void AVL<T>::deleteHelper(T &value, Node* &rt){
+	if(rt == NULL)
+		return;
+	else if (value < rt->element){
+		deleteHelper(value, rt->left);
+		if(height(rt->right) - height(rt->left) == 2){
+			if(rt->right->right == NULL)
+				doubleRotateWithRightChild(rt);
+			else
+				rotateWithRightChild(rt);
+		}
+		rt->deltaHeight = max(height(rt->left), height(rt->right)) +1;
+	}
+	else if (value > rt->element){
+		deleteHelper(value, rt->right);
+		if(height(rt->left) - height(rt->right) == 2){
+			if(rt->left->right == NULL)
+				doubleRotateWithLeftChild(rt);
+			else
+				rotateWithLeftChild(rt);
+		}
+		rt->deltaHeight = max(height(rt->left),height(rt->right)) + 1;
+	}
+	else if(rt->left != NULL && rt->right != NULL){
+		rt->element = findMin(rt->right)->element;
+		deleteHelper(rt->element, rt->right);
+	}
+	else{
+		Node* old = rt;
+		rt = (rt->left != NULL) ? rt->left : rt->right;
+		delete old;
+		numNodes--;
+	}
+}
+//****************//
