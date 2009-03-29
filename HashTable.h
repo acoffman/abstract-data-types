@@ -21,6 +21,8 @@ using namespace std;
 template <typename T>
 class HashTable : public SearchableADT<T>{
 	public:
+		HashTable();
+		~HashTable();
 		int loadFromFile(string filename);
 		void clear();
 		void insertEntry(T value);
@@ -31,7 +33,7 @@ class HashTable : public SearchableADT<T>{
 		int tableCapacity(); 
 
 	private:
-			struct HashNode{
+		struct HashNode{
 			T elem;
 			bool deleted;
 		};
@@ -40,7 +42,10 @@ class HashTable : public SearchableADT<T>{
 		int tableSize;
 		int numElements;
 
-		bool is_empty(int index);
+		bool is_empty(int index){return (table[index] == NULL) || (table[index]->deleted);};
+		bool should_stop(int index){return table[index] == NULL;}
+		double lambda(){return (double)numElements/tableSize;};
+
 		int h1(T elem);
 		int h2(T elem);
 };
