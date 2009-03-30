@@ -64,6 +64,9 @@ bool HashTable<T>::isThere(T elem){return search(elem) != -1;}
 
 template <class T>
 void HashTable<T>::insertEntry(T value){
+	if(lambda() > 0.7)
+		rehash();
+
 	int hash_one = h1(value);
 	HashNode newItem;
 	newItem.deleted = false;
@@ -118,6 +121,23 @@ int HashTable<T>::h1(T elem){
       hash = ((hash << 5) + hash) + elem[i];
    
    return hash;
+}
+
+template <class T>
+int HashTable<T>::h2(T elem){
+	
+}
+
+template <class T>
+void HashTable<T>::rehash(){
+	int oldSize = tableSize;
+	tableSize = tableSize*2 + 1;
+	HashNode *old = table;
+	table = new HashNode[tableSize];
+	for(int i=0; i < oldSize; i++)
+		if(old[i].deleted == false && (*old[i].elem) != "")
+			insertEntry((*old[i].elem));
+	delete [] old;
 }
 
 
