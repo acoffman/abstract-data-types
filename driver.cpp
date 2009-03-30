@@ -56,7 +56,7 @@ int main(int agvc, char* argvc[]){
 			 << "Please select 1, 2 or 3: ";
 	cin >> choice;
 
-	while(choice < 1 || choice > 2){
+	while(choice < 1 || choice > 3){
 		cout << "Invalid selection, please choose 1, 2 or 3: ";
 		cin >> choice;
 	}
@@ -201,5 +201,5 @@ void report_stats(){
 		if(tSize == -1)
 		 cout << "The tree is " <<  dictionary->treeHeight() << " layers deep." << endl;
 		else
-		 cout << "The the hash table has a capacity of" << dictionary->tableCapacity() <<  "elements." << endl;	
+		 cout << "The the hash table has a capacity of " << dictionary->tableCapacity() <<  " elements." << endl;	
 }
