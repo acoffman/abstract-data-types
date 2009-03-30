@@ -22,6 +22,7 @@ template <typename T>
 class HashTable : public SearchableADT<T>{
 	public:
 		HashTable();
+		HashTable(int initialSize);
 		~HashTable();
 		int loadFromFile(string filename);
 		void clear();
@@ -41,13 +42,16 @@ class HashTable : public SearchableADT<T>{
 		HashNode *table;
 		int tableSize;
 		int numElements;
+		int initSize;
 
-		bool is_empty(int index){return (table[index] == NULL) || (table[index]->deleted);};
+		bool is_empty(int index){return (table[index] == NULL) || (table[index].deleted);};
 		bool should_stop(int index){return table[index] == NULL;}
 		double lambda(){return (double)numElements/tableSize;};
 
 		int h1(T elem);
 		int h2(T elem);
+		int search(T elem);
+		void rehash();
 };
 
 
