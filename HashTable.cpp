@@ -64,7 +64,7 @@ bool HashTable<T>::isThere(T elem){return search(elem) != -1;}
 
 template <class T>
 void HashTable<T>::insertEntry(T value){
-	if(lambda() > 0.7)
+	if(lambda() > 0.6)
 		rehash();
 
 	int hash_one = h1(value);
