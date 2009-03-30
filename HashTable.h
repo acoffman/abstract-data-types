@@ -35,7 +35,7 @@ class HashTable : public SearchableADT<T>{
 
 	private:
 		struct HashNode{
-			T elem;
+			T *elem;
 			bool deleted;
 		};
 		
@@ -44,8 +44,8 @@ class HashTable : public SearchableADT<T>{
 		int numElements;
 		int initSize;
 
-		bool is_empty(int index){return (table[index] == NULL) || (table[index].deleted);};
-		bool should_stop(int index){return table[index] == NULL;}
+		bool is_empty(int index){return (table[index].elem == NULL) || (table[index].deleted);};
+		bool should_stop(int index){return table[index].elem == NULL;}
 		double lambda(){return (double)numElements/tableSize;};
 
 		int h1(T elem);
