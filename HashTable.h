@@ -5,7 +5,8 @@
  *
  * Description: This is the header file for the Hash Table
  * It contains variables and function protoypes. This table
- * uses double hashing for collision resolution
+ * uses double hashing for collision resolution, and lazy deletion.
+ * Values are actually removed on Rehashing. 
  * 
  * Build Instructions: A makefile is included in the project directory
  * 	program can be run as ./driver
@@ -17,6 +18,8 @@
 using namespace std;
 
 #include "SearchableADT.h"
+#include <string>
+#include <cmath>
 
 template <typename T>
 class HashTable : public SearchableADT<T>{
@@ -35,7 +38,7 @@ class HashTable : public SearchableADT<T>{
 
 	private:
 		struct HashNode{
-			T *elem;
+			T elem;
 			bool deleted;
 		};
 		
@@ -44,14 +47,13 @@ class HashTable : public SearchableADT<T>{
 		int numElements;
 		int initSize;
 
-		bool is_empty(int index){return (table[index].elem == NULL) || (table[index].deleted);};
-		bool should_stop(int index){return table[index].elem == NULL;}
 		double lambda(){return (double)numElements/tableSize;};
 
 		int h1(T elem);
 		int h2(T elem);
 		int search(T elem);
 		void rehash();
+		void insertIntoTable(T value, HashNode* &table);
 };
 
 

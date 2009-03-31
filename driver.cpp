@@ -74,7 +74,7 @@ int main(int agvc, char* argvc[]){
 			 	 << "   2. Clear current dictionary." << endl
 				 << "   3. Check for an entry." << endl
 				 << "   4. Check for entries from a file." << endl
-			 	 << "   5. Report tree statistics." << endl
+			 	 << "   5. Report statistics." << endl
 				 << "   6. Exit." << endl
 				 << "Selection: ";
 
